@@ -2,8 +2,6 @@ package simstation;
 import mvc.*;
 
 public abstract class SimulationFactory implements AppFactory{
-    public Model makeModel() { return new Simulation(); }
-
     public View makeView(Model model) {
         return new SimulationView(model);
     }
