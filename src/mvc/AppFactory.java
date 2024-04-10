@@ -1,20 +1,13 @@
 package mvc;
+
 import java.util.*;
 
 public interface AppFactory {
-
     public Model makeModel();
-
-    public View makeView(Model m);
-
+    public View makeView(Model model);
     public String getTitle();
-
     public String[] getHelp();
-
     public String about();
-
     public String[] getEditCommands();
-
-    public Command makeEditCommand(Model model, String type, Object source);
-
+    public Command makeEditCommand(Model mode, String type, Object source);
 }
