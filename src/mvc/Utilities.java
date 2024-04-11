@@ -1,7 +1,7 @@
 package mvc;
 
+
 import java.awt.event.*;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Random;
 import javax.swing.*;
@@ -53,10 +53,8 @@ public class Utilities {
 
     // asks user to save changes
     public static void saveChanges(Model model) {
-        if (model.getUnsavedChanges() &&
-                !Utilities.confirm("current model has unsaved changes, continue?")) {
+        if (model.getUnsavedChanges() && !Utilities.confirm("current model has unsaved changes, continue?"))
             Utilities.save(model, false);
-        }
     }
 
     // asks user for a file name
@@ -108,6 +106,7 @@ public class Utilities {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
             newModel = (Model)is.readObject();
             is.close();
+            System.out.println("Opened: "+fName);
         } catch (Exception err) {
             Utilities.error(err);
         }
