@@ -6,6 +6,9 @@ import java.awt.*;
 import java.util.Iterator;
 
 class RandomWalkFactory extends SimulationFactory {
+    public RandomWalkFactory(Color background){
+        super(background);
+    }
     public Model makeModel() { return new RandomWalkSimulation(); }
     public String getTitle() { return "Random Walks";}
 }
