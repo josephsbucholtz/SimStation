@@ -23,7 +23,6 @@ public class Simulation extends Model {
         return agents.size();
     }
 
-    // provides agents with thread safe access to Console.stdout:
     public synchronized void println(String msg) {
         System.out.println(msg);
     }
