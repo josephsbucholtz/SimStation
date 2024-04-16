@@ -24,11 +24,14 @@ public class PlagueView extends SimulationView {
             int xc = h.getXc();
             int yc = h.getYc();
             int rectSize = 8;
-
-            gc.setColor(h.getColor());
+            if (h.getInfected()) {
+                gc.setColor(Color.RED);
+            }
+            else {
+                gc.setColor(Color.GREEN);
+            }
             gc.fillRect(xc, yc, rectSize, rectSize);
         }
-        System.out.println("PlagueView's paintComponent");
         gc.setColor(oldColor);
     }
 

@@ -2,12 +2,10 @@ package SimStation.randomWalks;
 
 import mvc.*;
 import SimStation.*;
-import java.awt.*;
-import java.util.Iterator;
+
 
 class Drunk extends Agent {
     private Heading heading;
-    private int steps;
 
     public Drunk() {
         super("Random Walk Agent");
@@ -19,7 +17,7 @@ class Drunk extends Agent {
     }
     public void update() {
         heading = Heading.random();
-        steps = Utilities.rng.nextInt(10) + 1;
+        int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
 

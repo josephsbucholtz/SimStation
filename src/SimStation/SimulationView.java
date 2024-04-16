@@ -25,7 +25,6 @@ public class SimulationView extends View{
             int rectSize = 8;
             gc.fillRect(xc, yc, rectSize, rectSize);
         }
-        System.out.println("Simulation View's paintComponent");
         gc.setColor(oldColor);
 
     }

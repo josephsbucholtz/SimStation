@@ -1,8 +1,8 @@
 package SimStation.plague;
 
 import SimStation.SimulationFactory;
-import SimStation.randomWalks.RandomWalksSimulation;
 import mvc.Model;
+import mvc.View;
 
 import java.awt.*;
 
@@ -11,5 +11,8 @@ public class PlagueFactory extends SimulationFactory {
         super(background);
     }
     public Model makeModel() { return new PlagueSimulation(); }
+    public View makeView(Model m){
+        return new PlagueView(m, background);
+    }
     public String getTitle() { return "Plague";}
 }

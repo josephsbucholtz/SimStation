@@ -101,37 +101,29 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
             switch (direction){
                 case NORTH:
                     yc -= 1;
-
                     break;
                 case EAST:
                     xc += 1;
-
                     break;
                 case SOUTH:
                     yc += 1;
-
                     break;
                 case WEST:
                     xc -= 1;
-
                     break;
             }
             // Check for wrapping around the screen on the x-axis
             if (xc >= FRAME_WIDTH / 2) {
                 xc = 1;
-
             } else if (xc < 0) {
                 xc = FRAME_WIDTH / 2 - 1;
-
             }
 
             // Check for wrapping around the screen on the y-axis
             if (yc >= FRAME_HEIGHT) {
                 yc = 1;
-
             } else if (yc < 0) {
                 yc = FRAME_HEIGHT - 1;
-
             }
             world.changed();
         }
@@ -143,7 +135,4 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
 
     public abstract void update();
 
-    public Color getColor() {
-        return null;
-    }
 }
