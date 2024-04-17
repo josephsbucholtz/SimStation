@@ -2,7 +2,6 @@ package PrisonerDilemma;
 
 import simstation.*;
 import mvc.*;
-
 import java.awt.*;
 import java.util.*;
 import java.util.List;

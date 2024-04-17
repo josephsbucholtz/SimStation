@@ -2,7 +2,6 @@ package PrisonerDilemma;
 
 import mvc.*;
 import simstation.*;
-
 import java.awt.*;
 
 class PrisonerFactory extends SimulationFactory {

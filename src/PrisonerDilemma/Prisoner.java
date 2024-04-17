@@ -1,9 +1,7 @@
 package PrisonerDilemma;
 
-import PrisonerDilemma.Strategy;
 import simstation.*;
 import mvc.Utilities;
-import PrisonerDilemma.*;
 
 public class Prisoner extends Agent {
     protected int fitness = 0;
