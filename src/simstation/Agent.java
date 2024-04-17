@@ -18,8 +18,9 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
     transient protected Thread myThread;
     protected Simulation world;
     private List<Agent> neighbors;
+    protected Heading heading;
 
-    public Agent(String name){
+    public Agent(){
         this.name = name;
         xc = Utilities.rng.nextInt(FRAME_WIDTH / 2);
         yc = Utilities.rng.nextInt(FRAME_HEIGHT);

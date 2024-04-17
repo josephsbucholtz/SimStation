@@ -1,87 +1,53 @@
 package PrisonerDilemma;
+
+import PrisonerDilemma.Strategy;
 import simstation.*;
-import mvc.*;
+import mvc.Utilities;
 import PrisonerDilemma.*;
 
-import java.util.ArrayList;
-
-
-class Prisoner extends Agent {
+public class Prisoner extends Agent {
     protected int fitness = 0;
     protected boolean partnerCheated = false;
-    private Strategy strategy;
-    private ArrayList<Boolean> data;
-    private PrisonerSimulation simulation;
+    Strategy strategy;
 
-    public Prisoner(PrisonerSimulation simulation) {
-        super("Prisoner");
-        this.strategy = null;
-        data = new ArrayList<>();
-        this.simulation = simulation;
-    }
-
-    public void addFitness(int fitness) {
-        this.fitness += fitness;
-    }
-
-    public int getFitness() {
-        return fitness;
-    }
-
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public ArrayList<Boolean> getData() {
-        return data;
-    }
-
-    public Boolean strategy() {
-        return strategy.cooperate(getData());
-    }
-
-    public void addData(Boolean tradeRes) {
-        data.add(tradeRes);
-    }
-
-    public void trade(Prisoner neighbor) {
-        Boolean prisStrat1 = strategy();
-        Boolean prisStrat2 = neighbor.strategy();
-
-        if(!prisStrat1 && prisStrat2) {
-            addFitness(5);
-            neighbor.addFitness(0);
-        } else if(prisStrat1 && prisStrat2) {
-            addFitness(3);
-            neighbor.addFitness(3);
-        } else if(prisStrat1) {
-            addFitness(0);
-            neighbor.addFitness(5);
-        } else {
-            addFitness(1);
-            neighbor.addFitness(1);
-        }
-
-        addData(prisStrat2);
-        neighbor.addData(prisStrat1);
+    public Prisoner() {
+        super();
+        heading = Heading.random();
     }
 
     @Override
+    public Heading getHeading() {
+        return Heading.random();
+    }
+
+    public boolean cooperate() {
+        return strategy.cooperate();
+    }
+
     public void update() {
-        PrisonerSimulation prison = (PrisonerSimulation) simulation;
-        Prisoner neighbor = (Prisoner) prison.getNeighbor(this, 5);
+        Prisoner pris2 = (Prisoner) world.getNeighbor(this, 10);
 
-        if(neighbor != null)
-            trade(neighbor);
+        // Check if p2 is null
+        if (pris2 == null) {
+            return;
+        }
 
-        simulation.changed();
+        boolean coop1 = this.cooperate();
+        boolean coop2 = pris2.cooperate();
+
+        pris2.partnerCheated = coop1;
+        this.partnerCheated = coop2;
+        if(coop1 && coop2) { this.updateFitness(3); pris2.updateFitness(3); }
+        else if(coop1 && !coop2) { this.updateFitness(0); pris2.updateFitness(5); }
+        else if(!coop1 && coop2) { this.updateFitness(5); pris2.updateFitness(0); }
+        else { this.updateFitness(1); pris2.updateFitness(1); }
+        heading = Heading.random();
+        int steps = Utilities.rng.nextInt(10) + 1;
+        move(steps);
     }
 
     public void updateFitness(int amt) {
         fitness += amt;
     }
+
 }

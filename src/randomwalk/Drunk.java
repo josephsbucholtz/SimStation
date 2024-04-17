@@ -10,7 +10,7 @@ class Drunk extends Agent {
     private int steps;
 
     public Drunk() {
-        super("Random Walk Agent");
+        super();
         heading = Heading.random();
     }
     @Override

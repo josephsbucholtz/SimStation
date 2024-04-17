@@ -1,97 +1,66 @@
 package PrisonerDilemma;
 
-import mvc.*;
 import simstation.*;
+import mvc.*;
+
 import java.awt.*;
-
-
+import java.util.*;
+import java.util.List;
 
 public class PrisonerSimulation extends Simulation {
-    private final int SIZE = 100;
-
-    private int cheatStratSize;
-    private int coopStratSize;
-    private int randomStratSize;
-    private int ti4tatStratSize;
-
-
-    public PrisonerSimulation() {
-        super();
-        coopStratSize = 0;
-        cheatStratSize = 0;
-        randomStratSize = 0;
-        ti4tatStratSize = 0;
-    }
-
-    @Override
+    private final int SIZE = 40;
     public void populate() {
+        for(int i=0; i<SIZE; i++) {
+            Prisoner prisoner = new Prisoner();
+            if(i<(SIZE / 4)) { prisoner.strategy = new AlwaysCheat();
+                addAgent(prisoner); }
 
-        Prisoner prisoner = new Prisoner(this);
+            else if(i<(SIZE / 2)) { prisoner.strategy = new AlwaysCooperate();
+                addAgent(prisoner); }
 
-        for(int i = 0; i < SIZE; i++) {
+            else if(i<((SIZE* 3) / 4)) { prisoner.strategy = new RandomlyCooperate();
+                addAgent(prisoner); }
 
-            switch (Utilities.rng.nextInt(4)) {
-
-                case 0:
-                    prisoner = new Prisoner(this);
-                    prisoner.setStrategy(new AlwaysCooperate(prisoner));
-                    addAgent(prisoner);
-                    coopStratSize++;
-                    break;
-                case 1:
-                    prisoner = new Prisoner(this);
-                    prisoner.setStrategy(new AlwaysCheat(prisoner));
-                    addAgent(prisoner);
-                    cheatStratSize++;
-                    break;
-                case 2:
-                    prisoner = new Prisoner(this);
-                    prisoner.setStrategy(new RandomlyCooperate(prisoner));
-                    addAgent(prisoner);
-                    randomStratSize++;
-                    break;
-                case 3:
-                    prisoner = new Prisoner(this);
-                    prisoner.setStrategy(new TitForTat(prisoner));
-                    addAgent(prisoner);
-                    ti4tatStratSize++;
-                    break;
-
-            }
-
+            else { prisoner.strategy = new TitForTat();
+                addAgent(prisoner); }
         }
-
     }
 
     public String[] getStats() {
-        double coopAverage = 0, cheatAverage = 0, randomAverage = 0, titfortatAverage = 0;
+        String[] stats = new String[6];
+        int alwaysCheatTotal=0;
+        int alwaysCooperateTotal=0;
+        int randomlyCooperateTotal=0;
+        int titForTatFitnessTotal=0;
+        List<Agent> agents = getAgents();
+        List<Prisoner> prisoners = new ArrayList<>();
 
-        for(int i = 0; i < SIZE; i++) {
-
-            Prisoner prisoner = (Prisoner) getAgents().get(i);
-
-            if(prisoner.getStrategy().getClass().equals((new AlwaysCooperate(prisoner)).getClass())) {
-                coopAverage += prisoner.getFitness();
-            } else if(prisoner.getStrategy().getClass().equals((new AlwaysCheat(prisoner)).getClass())) {
-                cheatAverage += prisoner.getFitness();
-            } else if(prisoner.getStrategy().getClass().equals((new RandomlyCooperate(prisoner)).getClass())) {
-                randomAverage += prisoner.getFitness();
-            } else if(prisoner.getStrategy().getClass().equals((new TitForTat(prisoner)).getClass())) {
-                titfortatAverage += prisoner.getFitness();
+        for(int i=0; i<agents.size(); i++) {
+            prisoners.add((Prisoner) (agents.get(i)));
+            if(prisoners.get(i).strategy instanceof AlwaysCheat) {
+                alwaysCheatTotal += prisoners.get(i).fitness;
             }
-
+            else if(prisoners.get(i).strategy instanceof AlwaysCooperate) {
+                alwaysCooperateTotal += prisoners.get(i).fitness;
+            }
+            else if(prisoners.get(i).strategy instanceof RandomlyCooperate) {
+                randomlyCooperateTotal += prisoners.get(i).fitness;
+            }
+            else if(prisoners.get(i).strategy instanceof TitForTat) {
+                titForTatFitnessTotal += prisoners.get(i).fitness;
+            }
         }
-        String[] stats = new String[4];
-        stats[0] = "average of alwaysCheat strategy = " + cheatAverage;
-        stats[1] = "average of alwaysCooperate strategy = " + coopAverage;
-        stats[2] = "average of randomlyCooperate strategy = " + randomAverage;
-        stats[3] = "average of Tit-For-Tat strategy = " + titfortatAverage;
+        stats[0] = "Prisoners: " + prisoners.size();
+        stats[1] = "Average of AlwaysCheat Strategy = " + String.format("%.2f", (double) alwaysCheatTotal/(SIZE/4));
+        stats[2] = "Average of AlwaysCooperate Strategy = " + String.format("%.2f", (double) alwaysCooperateTotal/(SIZE / 4));
+        stats[3] = "Average of RandomCooperate Strategy = " + String.format("%.2f", (double) randomlyCooperateTotal/(SIZE / 4));
+        stats[4] = "Average of TitForTat strategy = " + String.format("%.2f", (double) titForTatFitnessTotal/(SIZE / 4));
+        stats[5] = "Clock = " + this.getClock();
         return stats;
     }
 
     public static void main(String[] args) {
-        AppPanel panel = new SimulationPanel(new PrisonerFactory(Color.DARK_GRAY));
-        PrisonerSimulation simulation = new PrisonerSimulation();
+        AppPanel panel = new SimulationPanel(new PrisonerFactory(Color.GRAY));
         panel.display();
     }
 }

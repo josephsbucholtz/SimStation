@@ -1,17 +1,8 @@
 package PrisonerDilemma;
-
-import mvc.*;
-
-import java.util.ArrayList;
+import mvc.Utilities;
 
 public class RandomlyCooperate extends Strategy {
-
-    public RandomlyCooperate(Prisoner prisoner) {
-        super(prisoner);
-    }
-
-    @Override
-    public boolean cooperate(ArrayList<Boolean> data) {
+    public boolean cooperate() {
         return Utilities.rng.nextBoolean();
     }
 }

@@ -49,10 +49,6 @@ public class Simulation extends Model {
     //To be overridden in subclasses
     public void populate(){}
 
-    public Agent getNeighbor(Agent current, int steps){
-        //ToDo: to be overridden in subclasses
-        return null;
-    }
     public String[] getStats(){
         String[] stats = new String[2];
         stats[0] = "#agents = " + this.size();
@@ -79,4 +75,26 @@ public class Simulation extends Model {
         }
     }
 
+    public Agent getNeighbor(Agent current, int steps) {
+        double minDistance = Double.MAX_VALUE;
+        Agent nearestNeighbor = null;
+
+        for (Agent agent : agents) {
+            if (agent != current) {
+                double distance = distance(agent, current);
+                if (distance <= steps && distance < minDistance) {
+                    minDistance = distance;
+                    nearestNeighbor = agent;
+                }
+            }
+        }
+
+        return nearestNeighbor;
+    }
+
+    private double distance(Agent agent1, Agent agent2) {
+        int dx = agent1.getXc() - agent2.getXc();
+        int dy = agent1.getYc() - agent2.getYc();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }
