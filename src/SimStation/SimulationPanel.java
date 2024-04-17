@@ -34,7 +34,6 @@ public class SimulationPanel extends AppPanel {
         controlPanel.add(stop);
         controlPanel.add(stats);
 
-
     }
 
     public void setModel(Model m) {
@@ -46,4 +45,5 @@ public class SimulationPanel extends AppPanel {
             t.start(); // this will call Agent.run (see below)
         }
     }
+
 }
