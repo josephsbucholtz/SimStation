@@ -1,7 +1,6 @@
 package PrisonerDilemma;
 import simstation.*;
 import java.util.List;
-import mvc.*;
 import java.util.Random;
 
 
@@ -15,16 +14,16 @@ class Prisoner extends Agent {
         super("Prisoner");
     }
 
-    public void setNeighbors(List<Prisoner> neighbors) {
-        this.neighbors = neighbors;
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
-
 
     public boolean cooperate() {
         return strategy.cooperate(partnerCheated);
     }
 
     public void update() {
+
         if (neighbors.isEmpty()) {
             // No neighbor, so nothing to update
             return;
@@ -53,6 +52,7 @@ class Prisoner extends Agent {
 
         partnerCheated = !opponentCooperated;
     }
+
 
     public int updateFitness() {
         return fitness;

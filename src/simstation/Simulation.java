@@ -18,6 +18,12 @@ public class Simulation extends Model {
         return agents;
     }
 
+    public void setNeighbors(List<Agent> agents) {
+        for(Agent agent : agents){
+            agent.setNeighbors(agents);
+        }
+    }
+
     public int size(){
         return agents.size();
     }

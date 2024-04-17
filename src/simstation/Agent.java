@@ -2,6 +2,7 @@ package simstation;
 
 import mvc.Publisher;
 import mvc.Utilities;
+import java.util.List;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
     protected boolean suspended, stopped;
     transient protected Thread myThread;
     protected Simulation world;
-
+    private List<Agent> neighbors;
 
     public Agent(String name){
         this.name = name;
@@ -142,6 +143,11 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
     }
 
     public abstract void update();
+
+    public void setNeighbors(List<Agent> agentNeighbors) {
+        agentNeighbors.remove(this);
+        neighbors = agentNeighbors;
+    }
 
     public Color getColor() {
         return null;
