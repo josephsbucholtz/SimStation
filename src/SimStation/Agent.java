@@ -78,8 +78,9 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
 
 //At strategic places Agent.run calls empty methods: onStart, onInterrupted, and OnExit.
     public void run() {
-        onStart();
         myThread = Thread.currentThread();
+        checkSuspended();
+        onStart();
         while (!isStopped()) {
             try {
                 update();

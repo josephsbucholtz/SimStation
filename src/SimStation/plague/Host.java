@@ -47,7 +47,7 @@ public class Host extends Agent {
         //If neighbor isn't infected and isn't resistant, there is a 50% chance that neighbor will be infected
         heading = Heading.random();
         int steps = Utilities.rng.nextInt(10) + 1;
-        Host partner = world.getNeighbor(this, 10);
+        Host partner = (Host) world.getNeighbor(this, 10);
         if (this.infected && partner != null){
                 int infectionChance = Utilities.rng.nextInt(100);
                 if (infectionChance < VIRULENCE && !(partner.resistant) && !(partner.getInfected())){

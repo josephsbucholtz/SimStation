@@ -44,12 +44,12 @@ public class Simulation extends Model {
     //To be overridden in subclasses
     public void populate(){}
 
-    public Host getNeighbor(Agent current, int steps){
+    public Agent getNeighbor(Agent current, int steps){
         int startingPoint = Utilities.rng.nextInt(getAgents().size());
 
         for (int offset = 0; offset < getAgents().size(); offset++){
             int index = (startingPoint + offset) % getAgents().size();
-            Host neighbor = (Host)getAgents().get(index);
+            Agent neighbor = getAgents().get(index);
             int xcDifference = Math.abs(current.getXc() - neighbor.getXc());
             int ycDifference = Math.abs(current.getYc() - neighbor.getYc());
 
