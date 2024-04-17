@@ -1,9 +1,7 @@
-package randomwalk;
+package simstation.randomwalk;
 
 import mvc.*;
 import simstation.*;
-import java.awt.*;
-import java.util.Iterator;
 
 public class RandomWalkSimulation extends Simulation {
 
