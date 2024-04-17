@@ -8,7 +8,7 @@ public class Bird extends Agent{
     public Bird(){
         super();
         heading = Heading.random();
-        speed = Utilities.rng.nextInt(25) + 1;
+        speed = Utilities.rng.nextInt(5) + 1;
     }
     public int getSpeed(){
         return speed;

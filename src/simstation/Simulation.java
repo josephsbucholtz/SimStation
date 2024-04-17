@@ -84,7 +84,7 @@ public class Simulation extends Model {
             int xcDifference = Math.abs(current.getXc() - neighbor.getXc());
             int ycDifference = Math.abs(current.getYc() - neighbor.getYc());
 
-            if (xcDifference < steps || ycDifference < steps){
+            if (xcDifference < steps && ycDifference < steps){
                 return neighbor;
             }
         }

@@ -12,6 +12,7 @@ public class StartCommand extends Command{
             throw new Exception("Model must instantiate Simulation");
         }
         Simulation sim = (Simulation)model;
+        sim.getAgents().clear();
         sim.populate();
         sim.startTimer();
         for (Agent a : sim.getAgents()) {
