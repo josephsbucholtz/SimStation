@@ -1,5 +1,6 @@
 package simstation;
 import mvc.*;
+import simstation.*;
 
 public class StatsCommand extends Command{
     public StatsCommand(Model model) {
@@ -12,6 +13,6 @@ public class StatsCommand extends Command{
             throw new Exception("Model must instantiate Simulation");
         }
         Simulation sim = (Simulation)model;
-        Message.displayStats(sim.getStats());
+        Message.displayStats(sim.getStats(sim.getAgents()));
     }
 }

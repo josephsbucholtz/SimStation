@@ -18,12 +18,15 @@ class Prisoner extends Agent {
         this.strategy = strategy;
     }
 
+    public Strategy getStrategy() {
+        return strategy;
+    }
+
     public boolean cooperate() {
         return strategy.cooperate(partnerCheated);
     }
 
     public void update() {
-
         if (neighbors.isEmpty()) {
             // No neighbor, so nothing to update
             return;
