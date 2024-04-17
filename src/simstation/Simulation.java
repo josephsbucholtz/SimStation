@@ -53,7 +53,7 @@ public class Simulation extends Model {
         //ToDo: to be overridden in subclasses
         return null;
     }
-    public String[] getStats(List<Agent> agents){
+    public String[] getStats(){
         String[] stats = new String[2];
         stats[0] = "#agents = " + this.size();
         stats[1] = "clock = " + this.getClock();

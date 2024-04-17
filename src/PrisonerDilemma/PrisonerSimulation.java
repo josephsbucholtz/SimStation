@@ -1,56 +1,97 @@
 package PrisonerDilemma;
 
 import mvc.*;
-import PrisonerDilemma.*;
 import simstation.*;
 import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
+
 
 
 public class PrisonerSimulation extends Simulation {
-    private ArrayList<Integer> arr = new ArrayList<>();
+    private final int SIZE = 100;
+
+    private int cheatStratSize;
+    private int coopStratSize;
+    private int randomStratSize;
+    private int ti4tatStratSize;
+
+
+    public PrisonerSimulation() {
+        super();
+        coopStratSize = 0;
+        cheatStratSize = 0;
+        randomStratSize = 0;
+        ti4tatStratSize = 0;
+    }
 
     @Override
     public void populate() {
-        for (int i = 0; i < 100; i++)
-            addAgent(new Prisoner());
+
+        Prisoner prisoner = new Prisoner(this);
+
+        for(int i = 0; i < SIZE; i++) {
+
+            switch (Utilities.rng.nextInt(4)) {
+
+                case 0:
+                    prisoner = new Prisoner(this);
+                    prisoner.setStrategy(new AlwaysCooperate(prisoner));
+                    addAgent(prisoner);
+                    coopStratSize++;
+                    break;
+                case 1:
+                    prisoner = new Prisoner(this);
+                    prisoner.setStrategy(new AlwaysCheat(prisoner));
+                    addAgent(prisoner);
+                    cheatStratSize++;
+                    break;
+                case 2:
+                    prisoner = new Prisoner(this);
+                    prisoner.setStrategy(new RandomlyCooperate(prisoner));
+                    addAgent(prisoner);
+                    randomStratSize++;
+                    break;
+                case 3:
+                    prisoner = new Prisoner(this);
+                    prisoner.setStrategy(new TitForTat(prisoner));
+                    addAgent(prisoner);
+                    ti4tatStratSize++;
+                    break;
+
+            }
+
+        }
+
     }
 
-    @Override
-    public String[] getStats(List<Agent> agents) {
-        int n = agents.size();
-        if (n < 4) {
-            return new String[]{"Insufficient agents for calculation"};
+    public String[] getStats() {
+        double coopAverage = 0, cheatAverage = 0, randomAverage = 0, titfortatAverage = 0;
+
+        for(int i = 0; i < SIZE; i++) {
+
+            Prisoner prisoner = (Prisoner) getAgents().get(i);
+
+            if(prisoner.getStrategy().getClass().equals((new AlwaysCooperate(prisoner)).getClass())) {
+                coopAverage += prisoner.getFitness();
+            } else if(prisoner.getStrategy().getClass().equals((new AlwaysCheat(prisoner)).getClass())) {
+                cheatAverage += prisoner.getFitness();
+            } else if(prisoner.getStrategy().getClass().equals((new RandomlyCooperate(prisoner)).getClass())) {
+                randomAverage += prisoner.getFitness();
+            } else if(prisoner.getStrategy().getClass().equals((new TitForTat(prisoner)).getClass())) {
+                titfortatAverage += prisoner.getFitness();
+            }
+
         }
-
-        // Clear the ArrayList before populating with new fitness values
-        arr.clear();
-
-        for (Agent agent : agents) {
-            Prisoner a = (Prisoner) agent;
-            a.update();
-            arr.add(a.fitness);
-        }
-
         String[] stats = new String[4];
-        stats[0] = "average of alwaysCheat strategy = " + calculateAverageFitness(arr, 0, n / 4);
-        stats[1] = "average of alwaysCooperate strategy = " + calculateAverageFitness(arr, n / 4, n / 2);
-        stats[2] = "average of randomlyCooperate strategy = " + calculateAverageFitness(arr, n / 2, (3 * n) / 4);
-        stats[3] = "average of Tit-For-Tat strategy = " + calculateAverageFitness(arr, (3 * n) / 4, n);
+        stats[0] = "average of alwaysCheat strategy = " + cheatAverage;
+        stats[1] = "average of alwaysCooperate strategy = " + coopAverage;
+        stats[2] = "average of randomlyCooperate strategy = " + randomAverage;
+        stats[3] = "average of Tit-For-Tat strategy = " + titfortatAverage;
         return stats;
-    }
-
-    private double calculateAverageFitness(ArrayList<Integer> arr, int startIndex, int endIndex) {
-        double sum = 0;
-        for (int i = startIndex; i < endIndex; i++) {
-            sum += arr.get(i);
-        }
-        return sum / (endIndex - startIndex);
     }
 
     public static void main(String[] args) {
         AppPanel panel = new SimulationPanel(new PrisonerFactory(Color.DARK_GRAY));
+        PrisonerSimulation simulation = new PrisonerSimulation();
         panel.display();
     }
 }

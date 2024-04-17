@@ -1,17 +1,31 @@
 package PrisonerDilemma;
 import simstation.*;
-import java.util.List;
-import java.util.Random;
+import mvc.*;
+import PrisonerDilemma.*;
+
+import java.util.ArrayList;
 
 
 class Prisoner extends Agent {
     protected int fitness = 0;
     protected boolean partnerCheated = false;
     private Strategy strategy;
-    private List<Prisoner> neighbors;
+    private ArrayList<Boolean> data;
+    private PrisonerSimulation simulation;
 
-    public Prisoner() {
+    public Prisoner(PrisonerSimulation simulation) {
         super("Prisoner");
+        this.strategy = null;
+        data = new ArrayList<>();
+        this.simulation = simulation;
+    }
+
+    public void addFitness(int fitness) {
+        this.fitness += fitness;
+    }
+
+    public int getFitness() {
+        return fitness;
     }
 
     public void setStrategy(Strategy strategy) {
@@ -22,42 +36,52 @@ class Prisoner extends Agent {
         return strategy;
     }
 
-    public boolean cooperate() {
-        return strategy.cooperate(partnerCheated);
+    public ArrayList<Boolean> getData() {
+        return data;
     }
 
-    public void update() {
-        if (neighbors.isEmpty()) {
-            // No neighbor, so nothing to update
-            return;
-        }
+    public Boolean strategy() {
+        return strategy.cooperate(getData());
+    }
 
-        Prisoner opponent = neighbors.get(new Random().nextInt(neighbors.size()));
-        boolean opponentCooperated = opponent.cooperate();
+    public void addData(Boolean tradeRes) {
+        data.add(tradeRes);
+    }
 
-        if (cooperate() && opponentCooperated) {
-            // Both prisoners cooperated
-            fitness += 3;
-            opponent.fitness += 3;
-        } else if (!cooperate() && opponentCooperated) {
-            // Current prisoner cheated, opponent cooperated
-            fitness += 5;
-            opponent.fitness += 0;
-        } else if (cooperate() && !opponentCooperated) {
-            // Current prisoner cooperated, opponent cheated
-            fitness += 0;
-            opponent.fitness += 5;
+    public void trade(Prisoner neighbor) {
+        Boolean prisStrat1 = strategy();
+        Boolean prisStrat2 = neighbor.strategy();
+
+        if(!prisStrat1 && prisStrat2) {
+            addFitness(5);
+            neighbor.addFitness(0);
+        } else if(prisStrat1 && prisStrat2) {
+            addFitness(3);
+            neighbor.addFitness(3);
+        } else if(prisStrat1) {
+            addFitness(0);
+            neighbor.addFitness(5);
         } else {
-            // Both prisoners cheated
-            fitness += 1;
-            opponent.fitness += 1;
+            addFitness(1);
+            neighbor.addFitness(1);
         }
 
-        partnerCheated = !opponentCooperated;
+        addData(prisStrat2);
+        neighbor.addData(prisStrat1);
     }
 
+    @Override
+    public void update() {
+        PrisonerSimulation prison = (PrisonerSimulation) simulation;
+        Prisoner neighbor = (Prisoner) prison.getNeighbor(this, 5);
 
-    public int updateFitness() {
-        return fitness;
+        if(neighbor != null)
+            trade(neighbor);
+
+        simulation.changed();
+    }
+
+    public void updateFitness(int amt) {
+        fitness += amt;
     }
 }

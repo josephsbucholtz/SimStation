@@ -1,30 +1,13 @@
 package PrisonerDilemma;
-import mvc.*;
 
-interface Strategy {
-    boolean cooperate(boolean lastOpponentCooperated);
-}
+import java.util.ArrayList;
 
-class AlwaysCooperateStrategy implements Strategy {
-    public boolean cooperate(boolean lastOpponentCooperated) {
-        return true;
+public abstract class Strategy {
+    private Prisoner prisoner;
+    protected boolean stratMove;
+
+    public Strategy (Prisoner prisoner) {
+        this.prisoner = prisoner;
     }
-}
-
-class AlwaysCheatStrategy implements Strategy {
-    public boolean cooperate(boolean lastOpponentCooperated) {
-        return false;
-    }
-}
-
-class RandomCooperateStrategy implements Strategy {
-    public boolean cooperate(boolean lastOpponentCooperated) {
-        return Utilities.rng.nextBoolean();
-    }
-}
-
-class TitForTatStrategy implements Strategy {
-    public boolean cooperate(boolean lastOpponentCooperated) {
-        return lastOpponentCooperated;
-    }
+    public abstract boolean cooperate(ArrayList<Boolean> data);
 }

@@ -13,6 +13,6 @@ public class StatsCommand extends Command{
             throw new Exception("Model must instantiate Simulation");
         }
         Simulation sim = (Simulation)model;
-        Message.displayStats(sim.getStats(sim.getAgents()));
+        Message.displayStats(sim.getStats());
     }
 }
