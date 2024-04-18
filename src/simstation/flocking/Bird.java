@@ -24,9 +24,7 @@ public class Bird extends Agent{
             heading = neighbor.heading;
             speed = neighbor.speed;
         }
-        else{
-            heading = Heading.random();
-        }
+
         move(speed);
     }
 }
