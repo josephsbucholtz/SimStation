@@ -17,7 +17,6 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
     protected boolean suspended, stopped;
     transient protected Thread myThread;
     protected Simulation world;
-    private List<Agent> neighbors;
     protected Heading heading;
 
     public Agent(){
@@ -147,7 +146,6 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
 
     public void setNeighbors(List<Agent> agentNeighbors) {
         agentNeighbors.remove(this);
-        neighbors = agentNeighbors;
     }
 
     public Color getColor() {

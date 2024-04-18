@@ -36,6 +36,7 @@ public class Simulation extends Model {
     public synchronized Iterator<Agent> iterator() {
         return agents.iterator();
     }
+
     public void addAgent(Agent a) {
         agents.add(a);
         a.setSimulation(this);
@@ -75,19 +76,27 @@ public class Simulation extends Model {
         }
     }
 
-    public Agent getNeighbor(Agent current, int steps){
-        int startingPoint = Utilities.rng.nextInt(getAgents().size());
+    public Agent getNeighbor(Agent current, int steps) {
+        double minDistance = Double.MAX_VALUE;
+        Agent nearestNeighbor = null;
 
-        for (int offset = 0; offset < getAgents().size(); offset++){
-            int index = (startingPoint + offset) % getAgents().size();
-            Agent neighbor = getAgents().get(index);
-            int xcDifference = Math.abs(current.getXc() - neighbor.getXc());
-            int ycDifference = Math.abs(current.getYc() - neighbor.getYc());
-
-            if (xcDifference < steps && ycDifference < steps){
-                return neighbor;
+        for (Agent agent : agents) {
+            if (agent != current) {
+                double distance = distance(agent, current);
+                if (distance <= steps && distance < minDistance) {
+                    minDistance = distance;
+                    nearestNeighbor = agent;
+                }
             }
         }
-        return null;
+
+        return nearestNeighbor;
     }
+
+    private double distance(Agent agent1, Agent agent2) {
+        int dx = agent1.getXc() - agent2.getXc();
+        int dy = agent1.getYc() - agent2.getYc();
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
 }

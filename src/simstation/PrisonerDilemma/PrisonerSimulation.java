@@ -32,24 +32,24 @@ public class PrisonerSimulation extends Simulation {
         int randomlyCooperateTotal=0;
         int titForTatFitnessTotal=0;
         List<Agent> agents = getAgents();
-        List<Prisoner> prisoners = new ArrayList<>();
 
-        for(int i=0; i<agents.size(); i++) {
-            prisoners.add((Prisoner) (agents.get(i)));
-            if(prisoners.get(i).strategy instanceof AlwaysCheat) {
-                alwaysCheatTotal += prisoners.get(i).fitness;
+        for(Agent a: agents) {
+            Prisoner p = (Prisoner)a;
+            if(p.strategy instanceof AlwaysCheat) {
+                alwaysCheatTotal += p.fitness;
             }
-            else if(prisoners.get(i).strategy instanceof AlwaysCooperate) {
-                alwaysCooperateTotal += prisoners.get(i).fitness;
+            else if(p.strategy instanceof AlwaysCooperate) {
+                alwaysCooperateTotal += p.fitness;
             }
-            else if(prisoners.get(i).strategy instanceof RandomlyCooperate) {
-                randomlyCooperateTotal += prisoners.get(i).fitness;
+            else if(p.strategy instanceof RandomlyCooperate) {
+                randomlyCooperateTotal += p.fitness;
             }
-            else if(prisoners.get(i).strategy instanceof TitForTat) {
-                titForTatFitnessTotal += prisoners.get(i).fitness;
+            else if(p.strategy instanceof TitForTat) {
+                titForTatFitnessTotal += p.fitness;
             }
+
         }
-        stats[0] = "Prisoners: " + prisoners.size();
+        stats[0] = "Prisoners: " + SIZE;
         stats[1] = "Average of AlwaysCheat Strategy = " + String.format("%.2f", (double) alwaysCheatTotal/(SIZE/4));
         stats[2] = "Average of AlwaysCooperate Strategy = " + String.format("%.2f", (double) alwaysCooperateTotal/(SIZE / 4));
         stats[3] = "Average of RandomCooperate Strategy = " + String.format("%.2f", (double) randomlyCooperateTotal/(SIZE / 4));
