@@ -11,6 +11,7 @@ public class Prisoner extends Agent {
     public Prisoner() {
         super();
         heading = Heading.random();
+
     }
 
     @Override

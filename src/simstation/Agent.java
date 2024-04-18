@@ -20,7 +20,6 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
     protected Heading heading;
 
     public Agent(){
-        this.name = name;
         xc = Utilities.rng.nextInt(FRAME_WIDTH / 2);
         yc = Utilities.rng.nextInt(FRAME_HEIGHT);
         suspended = false;
