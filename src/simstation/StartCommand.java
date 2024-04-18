@@ -8,10 +8,10 @@ public class StartCommand extends Command{
 
     @Override
     public void execute() throws Exception {
-        if (!(model instanceof Simulation)){
+        if (!(model instanceof Simulation sim)){
             throw new Exception("Model must instantiate Simulation");
         }
-        Simulation sim = (Simulation)model;
+
         sim.getAgents().clear();
         sim.populate();
         sim.startTimer();

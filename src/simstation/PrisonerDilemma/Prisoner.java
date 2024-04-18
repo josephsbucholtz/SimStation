@@ -11,12 +11,12 @@ public class Prisoner extends Agent {
     public Prisoner() {
         super();
         heading = Heading.random();
-
     }
 
     @Override
     public Heading getHeading() {
-        return Heading.random();
+        // Return the current heading
+        return heading;
     }
 
     public boolean cooperate() {
@@ -36,11 +36,21 @@ public class Prisoner extends Agent {
 
         pris2.partnerCheated = coop1;
         this.partnerCheated = coop2;
-        if(coop1 && coop2) { this.updateFitness(3); pris2.updateFitness(3); }
-        else if(coop1 && !coop2) { this.updateFitness(0); pris2.updateFitness(5); }
-        else if(!coop1 && coop2) { this.updateFitness(5); pris2.updateFitness(0); }
-        else { this.updateFitness(1); pris2.updateFitness(1); }
-        heading = Heading.random();
+        if (coop1 && coop2) {
+            this.updateFitness(3);
+            pris2.updateFitness(3);
+        } else if (coop1 && !coop2) {
+            this.updateFitness(0);
+            pris2.updateFitness(5);
+        } else if (!coop1 && coop2) {
+            this.updateFitness(5);
+            pris2.updateFitness(0);
+        } else {
+            this.updateFitness(1);
+            pris2.updateFitness(1);
+        }
+
+        // Move the agent according to its heading
         int steps = Utilities.rng.nextInt(10) + 1;
         move(steps);
     }
@@ -48,5 +58,4 @@ public class Prisoner extends Agent {
     public void updateFitness(int amt) {
         fitness += amt;
     }
-
 }
