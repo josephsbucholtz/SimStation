@@ -6,12 +6,14 @@ import mvc.Utilities;
 public class Prisoner extends Agent {
     protected int fitness = 0;
     protected boolean partnerCheated = false;
+    protected boolean interactionOccurred = false;
     Strategy strategy;
     Heading heading;
 
     public Prisoner() {
         super();
         heading = Heading.random();
+        interactionOccurred = false;
     }
 
     @Override
@@ -46,28 +48,26 @@ public class Prisoner extends Agent {
         heading = Heading.random();
         Prisoner pris2 = (Prisoner) world.getNeighbor(this, 10);
 
-        // Check if p2 is null
-        if (pris2 == null) {
-            return;
-        }
+        if (pris2 != null && !interactionOccurred) { // Check if interaction hasn't occurred
+            interactionOccurred = true; // Mark interaction as occurred
+            boolean coop1 = this.cooperate();
+            boolean coop2 = pris2.cooperate();
 
-        boolean coop1 = this.cooperate();
-        boolean coop2 = pris2.cooperate();
-
-        pris2.partnerCheated = coop1;
-        this.partnerCheated = coop2;
-        if (coop1 && coop2) {
-            this.updateFitness(3);
-            pris2.updateFitness(3);
-        } else if (coop1 && !coop2) {
-            this.updateFitness(0);
-            pris2.updateFitness(5);
-        } else if (!coop1 && coop2) {
-            this.updateFitness(5);
-            pris2.updateFitness(0);
-        } else {
-            this.updateFitness(1);
-            pris2.updateFitness(1);
+            pris2.partnerCheated = coop1;
+            this.partnerCheated = coop2;
+            if (coop1 && coop2) {
+                this.updateFitness(3);
+                pris2.updateFitness(3);
+            } else if (coop1 && !coop2) {
+                this.updateFitness(0);
+                pris2.updateFitness(5);
+            } else if (!coop1 && coop2) {
+                this.updateFitness(5);
+                pris2.updateFitness(0);
+            } else {
+                this.updateFitness(1);
+                pris2.updateFitness(1);
+            }
         }
 
         // Move the agent according to its heading
