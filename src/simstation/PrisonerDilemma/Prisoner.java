@@ -43,6 +43,7 @@ public class Prisoner extends Agent {
     }
 
     public void update() {
+        heading = Heading.random();
         Prisoner pris2 = (Prisoner) world.getNeighbor(this, 10);
 
         // Check if p2 is null
