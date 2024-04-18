@@ -2,7 +2,6 @@ package simstation.plague;
 
 import simstation.*;
 import mvc.Model;
-
 import java.awt.*;
 
 public class PlagueView extends SimulationView {

@@ -7,6 +7,7 @@ public class Prisoner extends Agent {
     protected int fitness = 0;
     protected boolean partnerCheated = false;
     Strategy strategy;
+    Heading heading;
 
     public Prisoner() {
         super();
@@ -21,6 +22,24 @@ public class Prisoner extends Agent {
 
     public boolean cooperate() {
         return strategy.cooperate();
+    }
+
+    @Override
+    public void run() {
+        onStart();
+        myThread = Thread.currentThread();
+        while (!isStopped()) {
+            try {
+                update();
+                Thread.sleep(20);
+                checkSuspended();
+            } catch(InterruptedException e) {
+                onInterrupted();
+                world.println(e.getMessage());
+            }
+        }
+        onExit();
+        world.println(name + " stopped");
     }
 
     public void update() {

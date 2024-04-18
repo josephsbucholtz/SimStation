@@ -1,6 +1,6 @@
 package simstation;
-import mvc.*;
 
+import mvc.*;
 import java.awt.*;
 
 public abstract class SimulationFactory implements AppFactory {

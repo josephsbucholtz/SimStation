@@ -3,7 +3,6 @@ package simstation;
 import mvc.Publisher;
 import mvc.Utilities;
 import java.util.List;
-
 import java.awt.*;
 import java.io.Serializable;
 
@@ -60,7 +59,7 @@ public abstract class Agent extends Publisher implements Runnable, Serializable 
         }
     }
     // wait for notification if I'm not stopped and I am suspended
-    private synchronized void checkSuspended() {
+    protected synchronized void checkSuspended() {
         try {
             while(!stopped && suspended) {
                 wait();

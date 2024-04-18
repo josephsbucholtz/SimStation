@@ -3,7 +3,6 @@ package simstation.plague;
 import simstation.SimulationFactory;
 import mvc.Model;
 import mvc.View;
-
 import java.awt.*;
 
 public class PlagueFactory extends SimulationFactory {

@@ -3,7 +3,6 @@ package simstation.PrisonerDilemma;
 import simstation.*;
 import mvc.*;
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 public class PrisonerSimulation extends Simulation {

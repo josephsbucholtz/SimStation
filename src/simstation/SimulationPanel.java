@@ -42,5 +42,4 @@ public class SimulationPanel extends AppPanel {
             t.start(); // this will call Agent.run (see below)
         }
     }
-
 }

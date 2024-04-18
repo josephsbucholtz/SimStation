@@ -2,7 +2,6 @@ package simstation.plague;
 
 import simstation.*;
 import mvc.Utilities;
-import java.awt.*;
 import static simstation.plague.PlagueSimulation.*;
 
 
