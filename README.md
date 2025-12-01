@@ -30,6 +30,7 @@ Before running or modifying the project, ensure you have:
 
 📖 **About**
 SimStation provides an educational and extensible framework for experimenting with distributed, emergent, and agent-based behaviors. Each simulation consists of a population of agents—independent objects that move, interact, and update over time.
+
 Core Architecture
 The system is built on three fundamental principles:
 
