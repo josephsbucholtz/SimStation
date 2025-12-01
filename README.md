@@ -34,27 +34,27 @@ SimStation provides an educational and extensible framework for experimenting wi
 Core Architecture
 The system is built on three fundamental principles:
 
-Multithreading — Each agent runs in its own thread, enabling true concurrent behavior
-MVC Structure — Clear separation of model, view, and simulation logic for maintainable code
-Reusable Base Classes — Simplified extension points for creating new simulations
+- Multithreading — Each agent runs in its own thread, enabling true concurrent behavior
+- MVC Structure — Clear separation of model, view, and simulation logic for maintainable code
+- Reusable Base Classes — Simplified extension points for creating new simulations
 
 
 ✨ **Features**
 Prebuilt Simulations
 Explore complex behaviors through ready-to-run examples:
 
-Random Walk — Stochastic movement patterns
-Flocking — Emergent group behavior and alignment
-Plague Spread — Epidemic modeling and transmission dynamics
-Prisoner's Dilemma Tournament — Game theory and strategic interaction
+1. Random Walk — Stochastic movement patterns
+2. Flocking — Emergent group behavior and alignment
+3. Plague Spread — Epidemic modeling and transmission dynamics
+4. Prisoner's Dilemma Tournament — Game theory and strategic interaction
 
 Framework Capabilities
 
-🧵 Threaded agent execution for realistic concurrency
-🗺️ 2D environment with efficient neighbor lookup
-🎨 Flexible UI/UX extension (GUI or console-based)
-🔧 Reusable framework for custom agent behaviors
-📚 Ideal for teaching or experimenting with emergent systems
+- 🧵 Threaded agent execution for realistic concurrency
+- 🗺️ 2D environment with efficient neighbor lookup
+- 🎨 Flexible UI/UX extension (GUI or console-based)
+- 🔧 Reusable framework for custom agent behaviors
+- 📚 Ideal for teaching or experimenting with emergent systems
 
 
 📁 **Project Structure**
