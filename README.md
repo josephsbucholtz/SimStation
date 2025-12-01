@@ -28,7 +28,7 @@ Before running or modifying the project, ensure you have:
    git clone https://github.com/josephsbucholtz/SimStation.git
    cd SimStation
 
-📖 About
+📖 **About**
 SimStation provides an educational and extensible framework for experimenting with distributed, emergent, and agent-based behaviors. Each simulation consists of a population of agents—independent objects that move, interact, and update over time.
 Core Architecture
 The system is built on three fundamental principles:
@@ -38,7 +38,7 @@ MVC Structure — Clear separation of model, view, and simulation logic for main
 Reusable Base Classes — Simplified extension points for creating new simulations
 
 
-✨ Features
+✨ **Features**
 Prebuilt Simulations
 Explore complex behaviors through ready-to-run examples:
 
@@ -56,7 +56,7 @@ Framework Capabilities
 📚 Ideal for teaching or experimenting with emergent systems
 
 
-📁 Project Structure
+📁 **Project Structure**
 SimStation/
 ├── src/                # Java source files
 ├── .idea/              # IDE configuration (IntelliJ)
