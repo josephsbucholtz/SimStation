@@ -1,4 +1,4 @@
-# SimStation (README is AI generated, but the code is completely our group's work and the template code provided by SJSU CS 152)
+# SimStation
 A lightweight Java framework for building agent-based simulations such as Random Walk, Flocking, Plague spread, and Prisoner’s Dilemma.  
 
 ![Java](https://img.shields.io/badge/Java-8%2B-orange)  
