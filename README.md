@@ -29,55 +29,38 @@ Before running or modifying the project, ensure you have:
    cd SimStation
 
 📖 About
+SimStation provides an educational and extensible framework for experimenting with distributed, emergent, and agent-based behaviors. Each simulation consists of a population of agents—independent objects that move, interact, and update over time.
+Core Architecture
+The system is built on three fundamental principles:
 
-SimStation provides an educational and extensible framework for experimenting with distributed, emergent, and agent-based behaviors.
-Each simulation consists of a population of agents—independent objects that move, interact, and update over time.
-
-The system uses:
-
-Multithreading: each agent runs in its own thread
-
-MVC structure: encourages separation of model, view, and simulation logic
-
-Reusable base classes: easy to extend and create new simulations
+Multithreading — Each agent runs in its own thread, enabling true concurrent behavior
+MVC Structure — Clear separation of model, view, and simulation logic for maintainable code
+Reusable Base Classes — Simplified extension points for creating new simulations
 
 
 ✨ Features
+Prebuilt Simulations
+Explore complex behaviors through ready-to-run examples:
 
-Prebuilt simulation examples:
+Random Walk — Stochastic movement patterns
+Flocking — Emergent group behavior and alignment
+Plague Spread — Epidemic modeling and transmission dynamics
+Prisoner's Dilemma Tournament — Game theory and strategic interaction
 
-Random Walk
+Framework Capabilities
 
-Flocking
+🧵 Threaded agent execution for realistic concurrency
+🗺️ 2D environment with efficient neighbor lookup
+🎨 Flexible UI/UX extension (GUI or console-based)
+🔧 Reusable framework for custom agent behaviors
+📚 Ideal for teaching or experimenting with emergent systems
 
-Plague Spread
 
-Prisoner’s Dilemma Tournament
-
-Reusable framework for creating new agent behaviors
-
-Threaded agent execution
-
-2D environment with neighbor lookup
-
-Easy UI/UX extension (GUI or console)
-
-Great for teaching or experimenting with emergent behavior systems
-
-Project Structure
+📁 Project Structure
 SimStation/
-  ├── src/           # Java source files
-  ├── .idea/         # IDE config (IntelliJ)
-  ├── .gitignore
-  └── README.md
-
-
-Key code concepts include:
-
-Simulation — orchestrates agent activities
-
-Agent — base class for behaviors
-
-SimulationPanel — (if implemented) visual representation
-
-Concrete simulation folders/classes — e.g., Plague, Flocking, etc.
+├── src/                # Java source files
+├── .idea/              # IDE configuration (IntelliJ)
+├── .gitignore
+└── README.md
+Key Components
+ComponentPurposeSimulationOrchestrates agent activities and manages simulation lifecycleAgentBase class for defining custom agent behaviorsSimulationPanelVisual representation layer (when implemented)Concrete SimulationsSpecific implementations (e.g., Plague, Flocking)
